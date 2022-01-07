@@ -40,7 +40,7 @@ pub fn mesh_events_system(
     >,
     click_query: Query<(Entity, &Hover)>,
 ) {
-    if !state.enabled {
+    if !state.build_rays || !state.update_raycast {
         return;
     }
     for (entity, hover, hover_change) in hover_query.iter() {
@@ -79,10 +79,7 @@ pub fn mesh_events_system(
 }
 
 /// Listens for [HoverEvent] and [SelectionEvent] events and prints them
-pub fn event_debug_system(state: Res<RayCastPluginState>, mut events: EventReader<PickingEvent>) {
-    if !state.enabled {
-        return;
-    }
+pub fn event_debug_system(mut events: EventReader<PickingEvent>) {
     for event in events.iter() {
         info!("{:?}", event);
     }

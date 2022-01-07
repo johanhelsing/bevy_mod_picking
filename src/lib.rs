@@ -35,8 +35,8 @@ pub enum PickingSystem {
 pub type PickableMesh = bevy_mod_raycast::RayCastMesh<PickingRaycastSet>;
 /// A type alias for the concrete [RayCastSource](bevy_mod_raycast::RayCastSource) type used for Picking.
 pub type PickingCamera = bevy_mod_raycast::RayCastSource<PickingRaycastSet>;
-/// A type alias for the concrete [PluginState](bevy_mod_raycast::PluginState) type used for Picking.
-pub type RayCastPluginState = bevy_mod_raycast::PluginState<PickingRaycastSet>;
+/// A type alias for the concrete [DefaultPluginState](bevy_mod_raycast::DefaultPluginState) type used for Picking.
+pub type RayCastPluginState = bevy_mod_raycast::DefaultPluginState<PickingRaycastSet>;
 
 /// This unit struct is used to tag the generic ray casting types `RayCastMesh` and
 /// `RayCastSource`. This means that all Picking ray casts are of the same type. Consequently, any
@@ -73,7 +73,9 @@ fn update_state(
     mut raycast_state: ResMut<RayCastPluginState>,
     picking_state: Res<PickingPluginState>,
 ) {
-    raycast_state.enabled = picking_state.enabled;
+    raycast_state.build_rays = picking_state.enabled;
+    raycast_state.update_raycast = picking_state.enabled;
+    raycast_state.update_debug_cursor = picking_state.enabled;
 }
 
 pub struct DefaultPickingPlugins;
