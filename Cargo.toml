@@ -8,6 +8,7 @@ description = "A 3D mouse picking and raycasting plugin for Bevy."
 repository = "https://github.com/aevyrie/bevy_mod_picking/"
 keywords = ["gamedev", "picking", "bevy", "raycast"]
 categories = ["game-engines", "rendering"]
+resolver = "2"
 
 [dependencies]
 bevy = { git = "https://github.com/bevyengine/bevy", branch = "main", version = "0.5", default-features = false, features = ["render"] }
